@@ -11,8 +11,8 @@ if __name__ == '__main__':
 
 def e_config(user_reader, user_element):
     for row in user_reader:
-        if user_element == row['Element Name']:
-        # how to convert this to lower case?
+        if user_element.lower() == row['Element Name']:
+        # how to convert this to lower case and how to pull?
             user_anumber = int(row['ï»¿Atomic Number'])
     orbital = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f",
                "6d", "7p", "8s"]
