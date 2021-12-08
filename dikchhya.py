@@ -1,23 +1,22 @@
 import csv
-if __name__ == '__main__':
+def load_elements():
     fv = open("Elements_list.csv", "r")
     dialect = csv.Sniffer().sniff(fv.read(1024))
     fv.seek(0)
     reader = csv.DictReader(fv, delimiter=',')
-    # for row in reader:
-    #     print(row['ï»¿Atomic Number'])
-    # how to remove "ï»¿" and can we get better grade for this?
+    elements = list(reader)
+    return elements
 
+def anumber(elements_list,user_element):
+    for row in elements_list:
+        if user_element.lower() == row['Element Name'].lower():
+            atomnumber= int(row['ï»¿Atomic Number'])
+    return atomnumber
 
-def e_config(user_reader, user_element):
-    for row in user_reader:
-        if user_element.lower() == row['Element Name']:
-        # how to convert this to lower case and how to pull?
-            user_anumber = int(row['ï»¿Atomic Number'])
+def e_config(user_anumber):
     orbital = ["1s", "2s", "2p", "3s", "3p", "4s", "3d", "4p", "5s", "4d", "5p", "6s", "4f", "5d", "6p", "7s", "5f",
                "6d", "7p", "8s"]
     electro_c = ""
-    # for each_shell in orbital:
     x = 0
     while user_anumber > 0:
         orbit = orbital[x]
@@ -49,7 +48,10 @@ def e_config(user_reader, user_element):
         x += 1
     return electro_c
 
-print(e_config(user_reader= reader, user_element="Uranium"))
+def formal charges(elec_config):
+
+# print(e_config(user_reader= elements, user_element="Uranium"))
+# print(e_config(user_reader= elements, user_element="Iron"))
 
 
 
