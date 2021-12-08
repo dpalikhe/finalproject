@@ -1,23 +1,19 @@
-import csv
-CONSTANT = "html/map/file/Data.html"
-if __name__ == '__main__':
-    fv = open("Elements_list.csv", "r")
-    dialect = csv.Sniffer().sniff(fv.read())
-    fv.seek(0)
-    reader = csv.DictReader(fv, dialect=dialect)
-
-    def classify_elements(user_element):
-        non_metals = [1, 2, 6, 7, 8, 9, 10, 15, 16, 17, 18, 34, 35, 36, 53, 54, 85, 86, 117, 118]
-        metalloids = [5, 14, 32, 33, 51, 52, 84]
-        for row in reader:
-            if user_element == row['Element Name']:
-                atomic_num = row['ï»¿Atomic Number']
-                if atomic_num in non_metals:
-                    return "This element belongs to non-metals group."
-                elif atomic_num in metalloids:
-                    return "This element belongs to metalloids group."
-                else:
-                    return "This element belongs to metal group."
-    print(classify_elements(user_element=1))
-
-
+from dikchhya import load_elements, anumber
+from Classify import e_config, valence_electrons, classify_elements
+if __name__ == "__main__":
+    command=""
+    while command!="quit":
+        command=""
+        e_name = input("Please enter the element name: ")
+        if anumber(load_elements(),e_name)>0:
+            while command not in ["classification", "electronic configuration", "valence electrons", "quit"]:
+                command = input(
+                    f"What do you want to learn about {e_name}: classification, electronic configuration or valence electrons? Enter 'quit' to exit: ")
+                if command.lower() == "classification":
+                    print(classify_elements(anumber(load_elements(),e_name)))
+                elif command.lower() == "electronic configuration":
+                    print(e_config(anumber(load_elements(),e_name), e_name))
+                elif command.lower() == "valence electrons":
+                    print(valence_electrons(e_config(anumber(load_elements(),e_name), e_name)))
+                elif command != "quit":
+                    print("INVALID COMMAND")
